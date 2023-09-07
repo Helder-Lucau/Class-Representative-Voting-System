@@ -1,18 +1,14 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-
-engine = create_engine('sqlite:///elections.db')
+from connection import *
 
 Base = declarative_base()
 
 class Voter(Base):
     __tablename__ = "voters"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer(), primary_key=True)
     first_name = Column(String(), nullable=False)
     last_name = Column(String(), nullable=False)
-    phone = Column(Integer) 
+    phone = Column(Integer()) 
     course = Column(String())
 
     def __repr__(self):
@@ -25,7 +21,7 @@ class Voter(Base):
 class Candidate(Base):
     __tablename__ = "candidates"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer(), primary_key=True)
     first_name = Column(String(), nullable=False)
     last_name = Column(String(), nullable=False)
     course = Column(String())
@@ -41,9 +37,9 @@ class Candidate(Base):
 class Vote(Base):
     __tablename__ = "votes"
 
-    id = Column(Integer, primary_key=True)
-    voter_id = Column(Integer, ForeignKey('voters.id'))
-    candidate_id = Column(Integer, ForeignKey('canditates.id'))
+    id = Column(Integer(), primary_key=True)
+    voter_id = Column(Integer(), ForeignKey('voters.id'))
+    candidate_id = Column(Integer(), ForeignKey('canditates.id'))
     vote_count = Column(Integer())
 
     def __repr__(self):
