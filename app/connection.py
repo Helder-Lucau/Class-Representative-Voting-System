@@ -1,8 +1,10 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker 
 from sqlalchemy.ext.declarative import declarative_base
 
-
 engine = create_engine("sqlite:///voting.db")
-session = sessionmaker(bind=engine)
-session = session()
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# create the base declarative class model
+Base = declarative_base()
