@@ -13,14 +13,24 @@ def all_voters():
      for voter in session.query(Voter).distinct():
         click.echo(voter)
 
+@cli.command()
+@click.option('--last_name', prompt='Last name of the voter to search', type=str)
+def find_by_last_name(last_name):
+     voter = session.query(Voter).filter(Voter.last_name == last_name).first()
+     if voter:
+        click.echo(f"{voter}")
+     else:
+        click.echo("No voter found with this last name")
+
 # method to add new candidate 
 @cli.command()
-@click.option("--f_name", prompt="Enter your first name")
-@click.option("--l_name", prompt="Enter your last name")
-@click.option("--phone_no", prompt="Enter your phone number")
-@click.option("--department", prompt="Enter your course")
+@click.option("--f_name", prompt="Enter your first name", required=True, type=str)
+@click.option("--l_name", prompt="Enter your last name",  required=True, type=str)
+@click.option("--phone_no", prompt="Enter your phone number", required=True, type=int)
+@click.option("--department", prompt="Enter your course",  required=True, type=str)
  
 def add_candidates(f_name, l_name, phone_no, department):
+        "Add a new candidate record"
         new_candidate = Candidate(
             f_name = f_name,
             l_name = l_name,

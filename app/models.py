@@ -46,3 +46,5 @@ class Vote(Base):
         + f"voter id = {self.voter_id}, " \
         + f"candidate id = {self.candidate_id}, " \
         + f"number of vote = {self.vote_count}" 
+    
+    
